@@ -4,6 +4,8 @@ A sanitized record of superseded designs, discontinued branches, and lessons lea
 
 This repository is **not** a raw backup. Public archive material is limited to engineering notes, milestone descriptions, validation findings, and resolution plans that are safe to publish.
 
+Public-history cleanup and remaining unreachable-object removal are tracked in [HISTORY_REWRITE_REQUIRED.md](HISTORY_REWRITE_REQUIRED.md).
+
 ## Archive Purpose
 
 The archive supports three goals:
