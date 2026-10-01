@@ -58,7 +58,8 @@ Topics include:
 - remote LAN gateway concepts;
 - older Pisonet/controller branches;
 - motorcycle ESP32/LVGL HUD;
-- BlazeTube ESP8266 repeater/browser-terminal concept.
+- BlazeTube ESP8266 repeater/browser-terminal concept;
+- ESP8266 Arcade recovery and public-safe captive-portal derivative.
 
 ## Archive Standard
 
