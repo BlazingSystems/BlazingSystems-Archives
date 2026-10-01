@@ -1,0 +1,82 @@
+BLAZE PISONET TIMER — FINAL AUDIT REPORT
+Date: 2026-09-16
+
+FINAL AUDIO ASSETS
+------------------
+WELCOME_AUDIO
+Source: tacos.mp3
+Encoded: mono, 16 kHz, 16 kbps MP3
+Duration: 39.888 seconds
+Size: 79,820 bytes
+Result: PASS — below the 40-second maximum
+
+NEAR_END_AUDIO
+Source: faa.mp3
+Encoded: mono, 16 kHz, 16 kbps MP3
+Duration: 2.016 seconds
+Size: 4,076 bytes
+Result: PASS — complete recording, below 40 seconds
+
+TIMEOUT_AUDIO
+Source: timeout.mp3
+Encoded: mono, 16 kHz, 16 kbps MP3
+Duration: 22.500 seconds
+Size: 45,044 bytes
+Result: PASS — complete recording, below 40 seconds
+
+Total encoded audio: 128,940 bytes
+
+BEHAVIOR TEST REVIEW
+--------------------
+PASS  Welcome plays at idle startup only.
+PASS  A restored running timer suppresses the welcome recording.
+PASS  FAA starts when remaining time enters the warning range.
+PASS  FAA can restart at approximately two-second start intervals.
+PASS  Coin insertion interrupts all embedded recordings.
+PASS  Original insert-coin four-note tone remains unchanged.
+PASS  FAA is held off for two seconds after a coin pulse.
+PASS  Timeout starts when remaining time reaches zero.
+PASS  Timeout continues while the timer remains stopped.
+PASS  Timeout stops if a coin is accepted or a timed session starts.
+PASS  Reset stops all audio and turns both relays off.
+
+CODE CORRECTIONS VERIFIED
+-------------------------
+PASS  Removed continuous/periodic EEPROM commits from loop().
+PASS  EEPROM state size is compile-time checked against the 512-byte allocation.
+PASS  Invalid GPIO6-GPIO11 assignments are rejected.
+PASS  GPIO3 is reserved for fixed ESP8266 I2S NoDAC output.
+PASS  Duplicate pin assignments are rejected.
+PASS  Bad hardware mapping no longer erases sales or paid time.
+PASS  AP values are length-checked and HTML-escaped.
+PASS  Settings use HTTP POST.
+PASS  MP3 decoder work memory is allocated once.
+PASS  MP3 start-failure cleanup stops and closes the output correctly.
+PASS  Audio/tone interruption order was corrected.
+PASS  Near-end state after coin insertion was corrected.
+PASS  Timer uses rollover-safe unsigned millis() subtraction.
+PASS  Timer display rounds remaining fractional seconds upward.
+PASS  TM1637 display is limited to 99:59.
+PASS  Restored inconsistent timer state is normalized and saved.
+PASS  Coin input latch resets after pin/polarity changes.
+PASS  Relay GPIO labels in the dashboard follow configured pins.
+PASS  No LittleFS, SD, DFPlayer, or external audio storage code remains.
+
+SOURCE AND DATA VALIDATION
+--------------------------
+PASS  embedded_audio.h arrays were reconstructed and compared byte-for-byte
+      against the three converted MP3 files.
+PASS  Archive integrity test completed without errors.
+PASS  GNU G++ C++17 syntax check completed without warnings/errors using
+      ESP8266/Arduino-compatible API stubs.
+PASS  Clang C++17 syntax check completed without warnings/errors using
+      ESP8266/Arduino-compatible API stubs.
+
+BUILD LIMITATION
+----------------
+A complete Xtensa ESP8266 firmware binary was not generated in this environment
+because the actual ESP8266 Arduino board toolchain and installed Arduino
+libraries were unavailable. The source APIs were checked against the current
+ESP8266Audio and ESP8266 Arduino interfaces, and two independent C++ syntax
+checks passed. Compile once in your Arduino IDE with your exact board selection
+before physical flashing.
