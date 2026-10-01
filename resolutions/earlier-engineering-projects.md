@@ -230,3 +230,60 @@ The recovered raw source remains private because its original defaults included 
 
 The public Lab removes bundled credentials, uses user-supplied service keys where applicable, keeps account cookies/login state out of firmware, and documents that the ESP8266 is not a full remote-browser or remote-desktop engine. Compile, service-integration and multi-client hardware validation remain.
 
+
+
+---
+
+## Five-Face ESP32 LED Cube
+
+**Period:** 2026  
+**Status:** Recovered design / incomplete firmware framework
+
+A battery-powered LED-cube concept used five addressable WS2812B faces with an ESP32-family controller, local setup portal, OTA updates, optional network-aware applications, battery indication, and aggressive Wi-Fi power saving when network access was not needed.
+
+Recovered design notes described an 8×8-per-face prototype target (320 LEDs total) while keeping the mapping scalable to other panel sizes. Audio/microphone ideas and a bottom service panel were also explored.
+
+**Validation boundary:** the recovered implementation was a framework rather than a finished deployable firmware. Panel mapping, power/current limits, persistence, button behavior, dynamic Wi-Fi control, OTA recovery, audio integration and exact-board GPIO assignments still require a fresh implementation and hardware test.
+
+**Restart path:** rebuild as a modular ESP32 project with explicit panel geometry, measured power budgets, generated setup credentials, offline-first operation, safe OTA rollback and board-specific pin documentation.
+
+---
+
+## ESP32 Noise-Threshold Controller
+
+**Period:** 2026  
+**Status:** Recovered architecture / prototype-stage
+
+A sound-level controller was designed around an ESP32, digital I2S microphone input, addressable status LEDs, local AP/STA configuration, relay output and configurable time windows. A later multi-node version explored ESP-NOW reporting so a master could identify the loudest sustained node before applying a relay action.
+
+Recovered prototype notes included a single-node pin plan using I2S microphone signals, WS2812B data, relay output and three local buttons, plus packet structures for RMS/noise readings and master-control messages.
+
+**Validation boundary:** no independently validated final hardware build was recovered. Microphone calibration, SPL interpretation, multi-node timing, relay fail-safe behavior, radio coexistence, persistence and exact GPIO suitability remain hardware-dependent.
+
+**Restart path:** separate sensing, policy and relay control; calibrate against a reference meter; log raw/RMS values locally; make thresholds and schedules explicit; fail safe on missing sensor/network state; validate each board revision before deployment.
+
+---
+
+## Arduino Mega Centralized Pisonet Controller
+
+**Period:** 2024  
+**Status:** Historical embedded prototype
+
+An earlier centralized Pisonet design used an Arduino Mega 2560 with a color display, RTC, relay/LED/button channels for multiple PCs, timeout handling, clock-setting controls and a buzzer. The design predates the later ESP8266 distributed timer architecture.
+
+**Validation boundary:** recovered evidence confirms the architecture and historical code direction, but not a single audited final firmware suitable for publication as a current release.
+
+**Restart path:** retain this only as a hardware-history reference. Any modern rebuild should use modular per-unit controllers or a clearly documented central I/O design, persistent accounting, watchdog/fail-safe handling, replaceable display drivers and a neutral demo configuration.
+
+---
+
+## ESP8266 TOTP / 2FA Authenticator Study
+
+**Period:** 2024  
+**Status:** Recovered but divergent/unverified branches
+
+Earlier firmware drafts explored a local ESP8266 authenticator with AP/STA setup, small display support, local account storage, NTP/RTC time sources and TOTP generation. Historical branches diverged between EEPROM/LittleFS storage and included compile-time inconsistencies.
+
+**Publication boundary:** secrets used by authenticators are private security material and must never be bundled in public examples.
+
+**Restart path:** implement from a clean codebase, use encrypted or hardware-backed secret storage where feasible, provide explicit backup/recovery behavior, avoid exposing tokens through the web UI, and validate timekeeping and TOTP vectors before treating it as a usable authenticator.
