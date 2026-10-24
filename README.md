@@ -17,6 +17,8 @@ This repository is **not a raw backup**. It preserves lessons and provenance wit
 
 ## Archive Map
 
+- **[discarded/](discarded/)** — ideas explicitly stopped by the owner; no active development
+
 - **[embedded/](embedded/)** — historical embedded/Pisonet material that is safe to retain publicly
 - **[games/](games/)** — sanitized browser/arcade history
 - **[resolutions/](resolutions/)** — project-specific resolution notes and restart plans
